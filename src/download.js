@@ -6,7 +6,8 @@ const tc = require('@actions/tool-cache');
 
 const download = async inputs => {
   core.info(`Downloading OpenShift Cluster ${inputs.ocVersion}`);
-  const tagInfoUrl = `https://api.github.com/repos/openshift/origin/releases/tags/${inputs.ocVersion}`;
+  // const tagInfoUrl = `https://api.github.com/repos/openshift/origin/releases/tags/${inputs.ocVersion}`;
+  const tagInfoUrl = `https://api.github.com/repos/openshift/okd/releases/tags/${inputs.ocVersion}`;
   const headers = {};
   if (inputs.githubToken) {
     headers.Authorization = `token ${inputs.githubToken}`
