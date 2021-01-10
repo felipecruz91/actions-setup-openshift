@@ -40,7 +40,8 @@ const install = async ({openshiftTar, inputs}) => {
   const openshiftDirectory = `${extractedOpenshift}/${
     fs.readdirSync(extractedOpenshift)[0]
   }`;
-  execSync(`chmod +x ${openshiftDirectory}/oc`);
+  // execSync(`chmod +x ${openshiftDirectory}/oc`);
+  execSync(`chmod +x ${openshiftDirectory}`);
   core.exportVariable('OPENSHIFT_HOME', openshiftDirectory);
   core.addPath(openshiftDirectory);
   startCluster(inputs.enable);
