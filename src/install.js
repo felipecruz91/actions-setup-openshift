@@ -50,10 +50,10 @@ const install = async ({openshiftTar, inputs}) => {
     .toString()
     .replace(/[\n\r]/g, '');
   core.info(`Extracted openshift directory files: ${ls}`);
-  const openshiftDirectory = `${extractedOpenshift}/${
-    // fs.readdirSync(extractedOpenshift)[0]
-    fs.readdirSync(extractedOpenshift)
-  }`;
+  // const openshiftDirectory = `${extractedOpenshift}/${
+  //   fs.readdirSync(extractedOpenshift)[0]
+  // }`;
+  const openshiftDirectory = `${extractedOpenshift}`;
   core.info(`Openshift directory: ${openshiftDirectory}`);
   execSync(`chmod +x ${openshiftDirectory}/oc`);
   core.exportVariable('OPENSHIFT_HOME', openshiftDirectory);
