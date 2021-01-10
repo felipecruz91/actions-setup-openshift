@@ -41,7 +41,10 @@ describe('download module test suite', () => {
   });
   test('download with token, should download valid Linux version', async () => {
     // Given
-    const inputs = {ocVersion: '4.6.0-0.okd-2020-12-12-135354', githubToken: 'secret-token'};
+    const inputs = {
+      ocVersion: '4.6.0-0.okd-2020-12-12-135354',
+      githubToken: 'secret-token'
+    };
     tc.downloadTool.mockImplementationOnce(async () => {});
     // When
     await download(inputs);
