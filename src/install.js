@@ -14,7 +14,8 @@ const getClusterDir = cwd => {
 
 const clusterUp = (extraArgs = '') =>
   logExecSync(
-    `oc cluster up --routing-suffix="127.0.0.1.\${OC_DOMAIN:-nip.io}" ${extraArgs}`
+    `openshift-install create cluster`
+    // `oc cluster up --routing-suffix="127.0.0.1.\${OC_DOMAIN:-nip.io}" ${extraArgs}`
   );
 
 const startCluster = (enable = '') =>
