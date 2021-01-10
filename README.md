@@ -1,5 +1,4 @@
-Setup OpenShift GitHub Action
-===============================
+# Setup OpenShift GitHub Action
 
 [<img src="https://github.com/manusa/actions-setup-openshift/workflows/Main%20workflow/badge.svg" />](https://github.com/manusa/actions-setup-openshift/actions)
 
@@ -28,7 +27,7 @@ jobs:
       - name: Setup OpenShift
         uses: manusa/actions-setup-openshift@v1.1.2
         with:
-          oc version: 'v3.11.0'
+          oc version: '4.6.0-0.okd-2020-12-12-135354'
           github token: ${{ secrets.GITHUB_TOKEN }}
       - name: Interact with the cluster
         run: oc cluster status
@@ -36,17 +35,18 @@ jobs:
 
 ### Required input parameters
 
-| Parameter | Description |
-| --------- | ----------- |
-| `oc version` | OpenShift [version](https://github.com/openshift/origin/releases) to deploy |
+| Parameter    | Description                                                        |
+| ------------ | ------------------------------------------------------------------ |
+| `oc version` | OKD [version](https://github.com/openshift/okd/releases) to deploy |
 
 ### Optional input parameters
 
-| Parameter | Description |
-| --------- | ----------- |
-| `dns ip`  | External DNS server IP to use in node-config.yaml |
-| `enable`  | A list of components to enable (comma separated) |
+| Parameter      | Description                                                                              |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| `dns ip`       | External DNS server IP to use in node-config.yaml                                        |
+| `enable`       | A list of components to enable (comma separated)                                         |
 | `github token` | GITHUB_TOKEN secret value to access GitHub REST API with an unlimited number of requests |
+
 ## License
 
 The scripts and documentation in this project are released under the [Apache 2.0](./LICENSE).
