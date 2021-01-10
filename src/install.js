@@ -46,10 +46,6 @@ const install = async ({openshiftTar, inputs}) => {
     .replace(/[\n\r]/g, '');
   core.info(`Current working directory: ${cwd}`);
   const extractedOpenshift = await tc.extractTar(openshiftTar);
-  const ls = execSync(`ls -lah ${extractedOpenshift}`)
-    .toString()
-    .replace(/[\n\r]/g, '');
-  core.info(`Extracted openshift directory files: ${ls}`);
   // const openshiftDirectory = `${extractedOpenshift}/${
   //   fs.readdirSync(extractedOpenshift)[0]
   // }`;
