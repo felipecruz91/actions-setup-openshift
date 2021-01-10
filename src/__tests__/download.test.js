@@ -26,7 +26,7 @@ describe('download module test suite', () => {
   });
   test('download, should download valid Linux version', async () => {
     // Given
-    const inputs = {ocVersion: 'v1.33.7'};
+    const inputs = {ocVersion: '4.6.0-0.okd-2020-12-12-135354'};
     tc.downloadTool.mockImplementationOnce(async () => {});
     // When
     await download(inputs);
@@ -34,14 +34,14 @@ describe('download module test suite', () => {
     expect(axios).toHaveBeenCalledWith(
       expect.objectContaining({
         url:
-          'https://api.github.com/repos/openshift/origin/releases/tags/v1.33.7'
+          'https://api.github.com/repos/openshift/okd/releases/tags/4.6.0-0.okd-2020-12-12-135354'
       })
     );
     expect(tc.downloadTool).toHaveBeenCalledWith('http://valid');
   });
   test('download with token, should download valid Linux version', async () => {
     // Given
-    const inputs = {ocVersion: 'v1.33.7', githubToken: 'secret-token'};
+    const inputs = {ocVersion: '4.6.0-0.okd-2020-12-12-135354', githubToken: 'secret-token'};
     tc.downloadTool.mockImplementationOnce(async () => {});
     // When
     await download(inputs);
@@ -49,7 +49,7 @@ describe('download module test suite', () => {
     expect(axios).toHaveBeenCalledWith(
       expect.objectContaining({
         url:
-          'https://api.github.com/repos/openshift/origin/releases/tags/v1.33.7',
+          'https://api.github.com/repos/openshift/okd/releases/tags/4.6.0-0.okd-2020-12-12-135354',
         headers: {Authorization: 'token secret-token'}
       })
     );
