@@ -13,19 +13,26 @@ const getClusterDir = cwd => {
 };
 
 const clusterUp = (extraArgs = '') =>
-  logExecSync(`oc cluster up --routing-suffix="127.0.0.1.\${OC_DOMAIN:-nip.io}" ${extraArgs}`);
+  logExecSync(
+    `oc cluster up --routing-suffix="127.0.0.1.\${OC_DOMAIN:-nip.io}" ${extraArgs}`
+  );
 
-const startCluster = (enable = '') => clusterUp(
-  enable.split(',').filter(el => el !== '').map(el => `--enable=${el.trim()}`).join(' ')
-);
+const startCluster = (enable = '') =>
+  clusterUp(
+    enable
+      .split(',')
+      .filter(el => el !== '')
+      .map(el => `--enable=${el.trim()}`)
+      .join(' ')
+  );
 
 const stopCluster = () => logExecSync('oc cluster down');
 
 const replaceDnsIp = (clusterDir, dnsIp) => {
   core.info(`Replacing dnsIp field in ${clusterDir}`);
-  const nodeConfigYaml =  `${clusterDir}/node/node-config.yaml`;
+  const nodeConfigYaml = `${clusterDir}/node/node-config.yaml`;
   const config = fs.readFileSync(nodeConfigYaml, 'utf8');
-  const updatedConfig = config.replace("dnsIP: \"\"", `dnsIp: "${dnsIp}"`);
+  const updatedConfig = config.replace('dnsIP: ""', `dnsIp: "${dnsIp}"`);
   fs.writeFileSync(nodeConfigYaml, updatedConfig);
   const kubeDnsResolvConf = `${clusterDir}/kubedns/resolv.conf`;
   const customResolv = `nameserver ${dnsIp}\n`;
@@ -34,9 +41,12 @@ const replaceDnsIp = (clusterDir, dnsIp) => {
 
 const install = async ({openshiftTar, inputs}) => {
   core.info('Installing OpenShift Cluster');
-  const cwd = execSync(`pwd`).toString().replace(/[\n\r]/g, '');
+  const cwd = execSync(`pwd`)
+    .toString()
+    .replace(/[\n\r]/g, '');
   core.info(`Current working directory: ${cwd}`);
   const extractedOpenshift = await tc.extractTar(openshiftTar);
+  core.info(`Current working directory files: ${ls - lah}`);
   const openshiftDirectory = `${extractedOpenshift}/${
     fs.readdirSync(extractedOpenshift)[0]
   }`;
@@ -49,7 +59,7 @@ const install = async ({openshiftTar, inputs}) => {
   if (inputs.dnsIp && clusterDir) {
     stopCluster();
     replaceDnsIp(clusterDir, inputs.dnsIp);
-    clusterUp()
+    clusterUp();
   }
   execSync('oc login -u system:admin');
   const openshiftVersion = execSync(`oc version`)
